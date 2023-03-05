@@ -19,7 +19,7 @@ namespace Crud.Test.Systems.Controllers
             var mockUserService = new Mock<IUserService>();
             var mockMapper = new Mock<IMapper>();
             var controller = new ControllerUser(mockUserService.Object, mockMapper.Object);
-            var result = (OkObjectResult)await controller.Remove("dunha@gmail.com");
+            var result = (OkObjectResult)await controller.Remove("dunha@gmai.com");
             result.StatusCode.Should().Be(200);
         }
         [Fact]
