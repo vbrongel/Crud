@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Crud.Application</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Crud.Core\Crud.Core.csproj" />
+    <ProjectReference Include="..\Crud.Infraestructure\Crud.Infraestructure.csproj" />
+    <ProjectReference Include="..\Domain Layer\Crud.Core.csproj" />
+    <ProjectReference Include="..\Infraestructure\Crud.Infraestructure.csproj" />
+  </ItemGroup>
+
+</Project>
