@@ -20,6 +20,15 @@
             Address = address;
         }
 
+        public User(int id, string name, string email, DateTime dateOfBirth, string address)
+        {
+            Id = id;
+            Name = name;
+            Email = email;
+            DateOfBirth = dateOfBirth;
+            Address = address;
+        }
+
         public User(string name, string email)
         {
             Name = name;

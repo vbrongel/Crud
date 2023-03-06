@@ -24,7 +24,7 @@ namespace Crud.Application.Services
             if (!await CheckIfUserExist(user.Id))
                 return "Usuário não existe!";
             if (await CheckIfEmailExist(user.Email))
-                return "Já existe um usuário com este email! ";
+                return "Já existe um usuário com este email!";
             await _repository.Update(user);
             return "Usuário atualizado";
 
@@ -46,7 +46,7 @@ namespace Crud.Application.Services
 
         private async Task<bool> CheckIfEmailExist(string email) =>
             await _repository.SelectByEmail(email) != null ? true : false;
-        private async Task<bool> CheckIfUserExist(int id) => await _repository.SelectById(id) != null ? true : false;
+        public async Task<bool> CheckIfUserExist(int id) => await _repository.SelectById(id) != null ? true : false;
         private string Error(string message) => throw new Exception(message);
     }
 }

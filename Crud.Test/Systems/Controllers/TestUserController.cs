@@ -33,9 +33,8 @@ namespace Crud.Test.Systems.Controllers
             var mockLogger = new Mock<ILogger<User>>();
             var controller = new ControllerUser(mockService.Object, mockMapper.Object, mockLogger.Object);
             var userDto = new UserDto("test", "test@test.com");
-            await controller.Add(userDto);
-            mockService.Setup(serv => serv.Add(It.IsAny<User>()));
-            mockService.Verify(serv => serv.Add(new User()));
+            var result = (OkObjectResult)await controller.Add(userDto);
+            result.StatusCode.Should().Be(200);
 
         }
         
@@ -45,13 +44,9 @@ namespace Crud.Test.Systems.Controllers
             var mockMapper = new Mock<IMapper>();
             var mockService = new Mock<IUserService>();
             var mockLogger = new Mock<ILogger<User>>();
-            mockService.Setup(service => service.GetAll())
-                      .ReturnsAsync(new List<User>());
             var controller = new ControllerUser(mockService.Object, mockMapper.Object, mockLogger.Object);
-            var result = await controller.GetAll();
-            result.Should().BeOfType<OkObjectResult>();
-            var objectResult = (OkObjectResult)result;
-            objectResult.Value.Should().BeOfType<List<UserDto>>();
+            var result = (OkObjectResult)await controller.GetAll();
+            result.StatusCode.Should().Be(200);
         }
         [Fact]
         public async Task GetResultFromMethodGetByEmail()

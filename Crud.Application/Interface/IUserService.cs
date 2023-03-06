@@ -3,6 +3,7 @@ namespace Crud.Application.Interface
 {
     public interface IUserService
     {
+        Task<bool> CheckIfUserExist(int id);
         Task<IEnumerable<User>> GetAll();
         Task<User> GetByEmail(string email);
         Task<string> Add(User newUser);

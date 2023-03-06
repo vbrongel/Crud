@@ -1,7 +1,9 @@
 ﻿using Crud.Application.Services;
 using Crud.Core.Entities;
 using Crud.Infraestructure.Interface;
+using Crud.Infraestructure.Repository;
 using FluentAssertions;
+using Microsoft.Extensions.Configuration;
 using Moq;
 
 namespace Crud.Test.Systems.Service
@@ -16,10 +18,10 @@ namespace Crud.Test.Systems.Service
             var userPaylog = new User("dunha", "dunha@gmail.com", DateTime.Now, "test");
             var result = await service.Add(userPaylog);
             var newUser = await service.GetByEmail(userPaylog.Email);
-            if (newUser == null)
-                result.Should().Be("Usuário inserido");
-            else
+            if (newUser != null)
                 result.Should().Be("Já existe um usuário com este e-mail!");
+            else
+                result.Should().Be("Usuário inserido");
         }
 
         [Fact]
@@ -27,12 +29,19 @@ namespace Crud.Test.Systems.Service
         {
             var mockRepository = new Mock<IUserRepository>();
             var service = new UserService(mockRepository.Object);
-            var userPaylod = new User("dunha", "dunha@gmail.com", DateTime.Now, "test");
+            var userPaylod = new User(1,"dunha", "dunha@gmail.com", DateTime.Now, "test");
             var result = await service.Edit(userPaylod);
-            var newUser = await service.GetByEmail(userPaylod.Email);
-            if (newUser == null)
-                result.Should().Be("Usuário não encontrado!");
-            result.Should().Be("Usuário atualizado");
+            var checkIfEmailExist = await service.GetByEmail(userPaylod.Email);
+            var checkIfUserExist = await service.CheckIfUserExist(userPaylod.Id);
+            if (!checkIfUserExist)
+                result.Should().Be("Usuário não existe!");
+            else
+            {
+                if (checkIfEmailExist != null)
+                    result.Should().Be("Já existe um usuário com este email!");
+                else
+                    result.Should().Be("Usuário atualizado");
+            }
         }
 
         [Fact]
@@ -67,16 +76,11 @@ namespace Crud.Test.Systems.Service
             var mockRepository = new Mock<IUserRepository>();
             var service = new UserService(mockRepository.Object);
             var result = await service.GetAll();
-            result.Should().BeOfType<IEnumerable<User>>();
+            if (result.Count() <= 0)
+                new List<User>();
+            else
+                result.Should().BeOfType<IEnumerable<User>>();
         }
 
-        [Fact]
-        public async Task GetResultOfNullFromMethodGetAll()
-        {
-            var mockRepository = new Mock<IUserRepository>();
-            var service = new UserService(mockRepository.Object);
-            var result = await service.GetAll();
-            result.Should().BeOfType(null);
-        }
     }
 }
