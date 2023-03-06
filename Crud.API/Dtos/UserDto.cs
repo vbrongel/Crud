@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using AutoMapper.Internal.Mappers;
+using System.Text.Json.Serialization;
 
 namespace Crud.API.Dtos
 {
@@ -10,5 +11,13 @@ namespace Crud.API.Dtos
         public string Email { get; set; }
         [JsonPropertyName("data_nascimento")]
         public DateTime DateOfBirth { get; set; }
+        [JsonPropertyName("endereco")]
+        public string Address { get; set; }
+
+        public UserDto(string name, string email)
+        {
+            Name = name;
+            Email = email;
+        }
     }
 }

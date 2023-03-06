@@ -8,7 +8,9 @@ namespace API.Configuration
         public AutoMapper()
         {
             CreateMap<User, UserDto>();
-            CreateMap<UserDto, User>();  
+            CreateMap<UserDto, User>();
+            //CreateMap<User, UserDtoUpdate>();
+            CreateMap<UserDtoUpdate, User>();
         }
     }
 }

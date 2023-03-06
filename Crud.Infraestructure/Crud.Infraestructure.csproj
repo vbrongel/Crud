@@ -11,7 +11,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>API.Infraestructure</RootNamespace>
+    <RootNamespace>Crud.Infraestructure</RootNamespace>
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
@@ -22,9 +22,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Crud.Core\Crud.Core.csproj" />
-    <ProjectReference Include="..\Domain Layer\Crud.Core.csproj" />
+
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Sql\" />
+  </ItemGroup>
   <ItemGroup Condition="$(VisualStudioVersion) == '17.0'">
     <Reference Include="Microsoft.Data.Tools.Schema.Sql, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>$(SSDTPath)\Microsoft.Data.Tools.Schema.Sql.dll</HintPath>

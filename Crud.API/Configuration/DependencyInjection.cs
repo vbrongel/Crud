@@ -1,7 +1,9 @@
-﻿using Crud.Application.Interface;
+﻿using Crud.API.Helpers;
+using Crud.Application.Interface;
 using Crud.Application.Services;
 using Crud.Infraestructure.Interface;
 using Crud.Infraestructure.Repository;
+
 
 namespace Crud.API.Configuration
 {
@@ -11,6 +13,8 @@ namespace Crud.API.Configuration
         {
             service.AddScoped<IUserService, UserService>();
             service.AddScoped<IUserRepository, UserRepository>();
+            service.AddScoped<ITokenService, TokenService>();
+            service.AddScoped<ILogRepository, LogRepository>();
         }
     }
 }

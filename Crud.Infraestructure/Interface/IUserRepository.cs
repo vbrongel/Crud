@@ -4,6 +4,7 @@ namespace Crud.Infraestructure.Interface
 {
     public interface IUserRepository
     {
+
         Task<User> SelectById(int id);
         Task<IEnumerable<User>> SelectAll();
         Task Insert(User user);
